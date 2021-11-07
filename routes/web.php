@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/dashboard' , DashboardController::class );
+Route::get('admin/dashboard' , DashboardController::class )->name('admin.dashboard');
