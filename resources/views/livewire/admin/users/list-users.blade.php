@@ -61,48 +61,53 @@
     </div>
     <!-- /.content -->
 
-      <!-- /.modal -->
-      <div class="modal fade" id="form">
+    <!-- /.modal -->
+    <div class="modal fade" id="form" wire:ignore.sefl>
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Add New User</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="card-body">
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter full name">
-                      </div>
-                      <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
-                      </div>
-                      <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password">
-                      </div>
-                      <div class="form-group">
-                        <label for="passwordConfirmation">Comfirm Password</label>
-                        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Enter password again">
-                      </div>
+            <form wire:submit.prevent='createUser'>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New User</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <!-- /.card-body -->
-                  </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" wire:model.defer='user.name' class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter full name">
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" wire:model.defer='user.email' class="form-control" id="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" wire:model.defer='user.password' class="form-control" id="password" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordConfirmation">Comfirm Password</label>
+                                <input type="password" wire:model.defer='user.passwordConfirmation' class="form-control" id="passwordConfirmation"
+                                    placeholder="Enter password again">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
-
+    </div>
+    <!-- /.modal -->
 </div>
