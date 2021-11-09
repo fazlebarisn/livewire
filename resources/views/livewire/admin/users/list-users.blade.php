@@ -37,10 +37,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ( $users as $user )
                                     <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>faz@gmail.com</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
                                             <a href="">
                                                 <i class="fa fa-edit  mr-2"></i>
@@ -50,6 +51,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -92,9 +94,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation">Comfirm Password</label>
-                                <input type="password" wire:model.defer='user.password_confirmation' class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation"
+                                <input type="password" wire:model.defer='user.password_confirmation' class="form-control" id="password_confirmation"
                                     placeholder="Enter password again">
-                                    @error('password_confirmation') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
                         <!-- /.card-body -->

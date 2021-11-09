@@ -57,9 +57,15 @@
     <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 
     <script>
+
       window.addEventListener('show-form' , event => {
         $('#form').modal('show');
       })
+
+      window.addEventListener('hide-form' , event => {
+        $('#form').modal('hide');
+      })
+
     </script>
 
     @livewireScripts
