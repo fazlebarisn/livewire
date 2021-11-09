@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
     @livewireStyles
 </head>
 
@@ -55,19 +56,26 @@
     <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
 
     <script>
+        $( document ).ready(function() {
 
-      window.addEventListener('show-form' , event => {
-        $('#form').modal('show');
-      })
+            window.addEventListener('show-form' , event => {
+                $('#form').modal('show');
+            })
+            
+            toastr.options = {
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+            }
 
-      window.addEventListener('hide-form' , event => {
-        $('#form').modal('hide');
-      })
-
+            window.addEventListener('hide-form' , event => {
+                $('#form').modal('hide');
+                toastr.success(event.detail.message, 'Success!')
+            })
+        });
     </script>
-
     @livewireScripts
 </body>
 

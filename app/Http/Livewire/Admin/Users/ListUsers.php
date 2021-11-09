@@ -26,7 +26,7 @@ class ListUsers extends Component
         
         $validateData = Validator::make( $this->user,[
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
         ])->validate();
 
@@ -34,7 +34,7 @@ class ListUsers extends Component
         
         User::create($validateData);
 
-        $this->dispatchBrowserEvent('hide-form');
+        $this->dispatchBrowserEvent('hide-form' , ['message' => 'User Added Successfully!']);
 
         return redirect()->back();
 
