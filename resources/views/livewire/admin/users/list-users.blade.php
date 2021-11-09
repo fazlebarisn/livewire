@@ -62,7 +62,7 @@
     <!-- /.content -->
 
     <!-- /.modal -->
-    <div class="modal fade" id="form" wire:ignore.sefl>
+    <div class="modal fade" id="form" wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <form wire:submit.prevent='createUser'>
                 <div class="modal-content">
@@ -77,24 +77,24 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" wire:model.defer='user.name' class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter full name">
-                                @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="form-group">
                                 <label for="email">Email address</label>
-                                <input type="email" wire:model.defer='user.email' class="form-control" id="email" placeholder="Enter email">
+                                <input type="email" wire:model.defer='user.email' class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email">
+                                @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" wire:model.defer='user.password' class="form-control" id="password" placeholder="Enter Password">
+                                <input type="password" wire:model.defer='user.password' class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter Password">
+                                @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
                             </div>
                             <div class="form-group">
-                                <label for="passwordConfirmation">Comfirm Password</label>
-                                <input type="password" wire:model.defer='user.passwordConfirmation' class="form-control" id="passwordConfirmation"
+                                <label for="password_confirmation">Comfirm Password</label>
+                                <input type="password" wire:model.defer='user.password_confirmation' class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation"
                                     placeholder="Enter password again">
+                                    @error('password_confirmation') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
                         <!-- /.card-body -->
