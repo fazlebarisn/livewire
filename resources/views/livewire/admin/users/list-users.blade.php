@@ -43,7 +43,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a href="">
+                                            <a href="" wire:click.prevent="edit({{ $user }})">
                                                 <i class="fa fa-edit  mr-2"></i>
                                             </a>
                                             <a href="">
@@ -66,10 +66,14 @@
     <!-- /.modal -->
     <div class="modal fade" id="form" wire:ignore.self>
         <div class="modal-dialog modal-lg">
-            <form wire:submit.prevent='createUser'>
+            <form wire:submit.prevent = "{{ $showEditModel ? 'updateUser' : 'createUser'}}">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add New User</h4>
+                        @if ($showEditModel)
+                            <h4 class="modal-title">Edit User</h4>
+                        @else
+                            <h4 class="modal-title">Add New User</h4>
+                        @endif
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

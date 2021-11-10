@@ -9,14 +9,8 @@ use Illuminate\Support\Facades\Validator;
 class ListUsers extends Component
 {
     public $user = [];
-    // public $name;
-
-    // protected $rules = [
-    //     'user.name' => 'required',
-    //     'user.email' => 'required|email',
-    //     'user.password' => 'required|confirmed',
-    //     'user.password_confirmation' => 'required',
-    // ];
+    public $euser;
+    public $showEditModel = false;
 
     public function addNew(){
         $this->dispatchBrowserEvent('show-form');
@@ -36,7 +30,31 @@ class ListUsers extends Component
 
         $this->dispatchBrowserEvent('hide-form' , ['message' => 'User Added Successfully!']);
 
-        return redirect()->back();
+    }
+
+    public function edit( User $user ){
+
+        $this->showEditModel = true;
+        $this->euser = $user;
+        $this->user = $user->toArray();
+        $this->dispatchBrowserEvent('show-form');
+    }
+
+    public function updateUser(){
+
+        $validateData = Validator::make( $this->user,[
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $this->euser->id,
+            'password' => 'sometimes|confirmed',
+        ])->validate();
+
+        if( !empty( $validateData['password'] )){
+            $validateData['password'] = bcrypt($validateData['password']);
+        }
+
+        $this->euser->update($validateData);
+
+        $this->dispatchBrowserEvent('hide-form' , ['message' => 'User updated Successfully!']);
 
     }
 
