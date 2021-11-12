@@ -65,7 +65,7 @@
 
     <!-- /.modal -->
     <div class="modal fade" id="form" wire:ignore.self>
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <form wire:submit.prevent = "{{ $showEditModel ? 'updateUser' : 'createUser'}}">
                 <div class="modal-content">
                     <div class="modal-header">
